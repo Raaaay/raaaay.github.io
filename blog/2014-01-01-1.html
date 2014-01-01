@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="raaaay.github.io : Now, Welcome to Raaaay's Blog!" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../stylesheets/stylesheet.css">
 
-    <title>Now, Welcome to Raaaay's Blog!</title>
+    <title>如何在Apache中添加一个新模块</title>
   </head>
 
   <body>
@@ -24,9 +24,22 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
 		<section id="main_content" class="inner">
-			<h3><a href='blog/2014-01-01-1.html' target="_blank">如何在Apache中添加一个新模块</a></h3>
+			<h3>如何在Apache中添加一个新模块</h3>
 			<p>日前遇到一个需求，需要在Apache的access日志中打印出访问的url以及POST数据，经多方查证，dumpio模块可以做到，so，现在的问题是，我机器上的Apache在编译的时候并没有加入这个模块，那么怎样才能使我在不重装Apache的情况下添加一个新模块呢...</p>
+			
+			<p>Now, Come with me!</p>
 
+			<p><ul>
+				   <li>第一步：到svn上去下载dumpio的源文件
+				   <a href='http://svn.apache.org/repos/asf/httpd/httpd/branches/2.0.x/modules/experimental/mod_dumpio.c'>
+				   mod_dumpio.c。</a></li>
+				   <li>第二步：进入Apache目录，使用apxs进行编译，生成mod_dumpio.so文件。
+				   <pre><code>$APACHE_HOME/bin/apxs -c -i mod_dumpio.c</code></pre></li>
+				   <li>第三步：在Apache配置文件httpd.conf中加入模块。
+				   <pre><code>LoadModule modules/module_dumpio<br/>&lt;ifModule module_dumpio&gt;<br />#your config here<br />&lt;/ifModule&gt;</code></pre></li>
+				   <li>第四步：重启Apache就可以生效了。
+				   <pre><code>$APACHE_HOME/bin/apachectl restart<br />$APACHE_HOME/bin/apachectl -l</code></pre></li>
+			</ul></p>
 	<!--<pre><code>$ cd your_repo_root/repo_name
 		$ git fetch origin
 		$ git checkout gh-pages
