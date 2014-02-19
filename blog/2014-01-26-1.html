@@ -24,7 +24,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
 		<section id="main_content" class="inner">
-			<h3>初识FastCGI</h3>
+			<h2>1. 初识FastCGI</h2>
 			注：本文主要翻译自<a href="http://www.fastcgi.com/drupal/node/6?q=node/15" target="_blank">
 			http://www.fastcgi.com/drupal/node/6?q=node/15</a>
 			<p>FastCGI是一个<em>高效、开放、安全</em>的Web服务器接口，它很好地解决了CGI的性能问题，并且对其API并未引入额外负荷或复杂度。
@@ -57,6 +57,34 @@
 			<li><em>支持分布式计算</em></li>
 			</ul>
 			</p>
+			
+			<h2>2. FastCGI接口</h2>
+			<p>FastCGI提供的接口与CGI非常的类似，为此，我们首先来了解一下CGI都提供了哪些接口。</p>
+			<ul>
+			<li><em>对于每一个请求，服务器都创建一个进程（非线程）并且该进程自初始化。</em></li>
+			<li><em>web服务器将请求信息（如远程主机，用户，http header等）以环境变量的形式传递给CGI程序。</em></li>
+			<li><em>web服务器将任何客户端输入（如表单数据等）发送给CGI程序标准输入。</em></li>
+			<li><em>CGI程序将任何输出以标准输出方式返回给客户端，错误信息以标准错误形式返回并被web服务器记录。</em></li>
+			<li><em>CGI进程结束时，代表请求完成。</em></li>
+			</ul>
+			FastCGI的概念与CGI非常的类似，主要只有两点区别：
+			<blockquote>
+			<ul>
+			<li>FastCGI processes are persistent: after finishing a request, they wait for a new request instead of exiting.</li>
+			<li>Instead of using operating system environment variables and pipes, the FastCGI protocol multiplexes the environment information, standard input, output and error over a single full-duplex connection. This allows FastCGI programs to run on remote machines, using TCP connections between the Web server and the FastCGI application. </li>
+			</ul>
+			</blockquote>
+			在一个单线程的FastCGI应用中的请求处理过程如下：
+			<ul>
+			<li><em>web服务器创建一个FastCGI进程来处理请求，该进程可能是启动的时候就已经创建，也可能是应要求而创建。</em></li>
+			<li><em>FastCGI程序自初始化，并且等待来自web服务器的连接。</em></li>
+			<li><em>当有请求来到时，web服务器打开一个与FastCGI进程的连接，并且将CGI环境变量和标准输入通过该连接进行传输。</em></li>
+			<li><em>FastCGI进程通过相同的连接返回标准输出及错误信息。</em></li>
+			<li><em>当FastCGI进程关闭连接时，请求结束。FastCGI进程会等待来自web服务器的下一个连接。</em></li>
+			</ul>
+			FastCGI可以在本地或者远程运行，分别采用的是全双工通道和TCP连接。FastCGI也可以是单线程或者多线程程序。
+			
+			<h2>3. FastCGI协议</h2>
 		</section>
     </div>
 
