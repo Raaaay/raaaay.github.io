@@ -11,3 +11,5 @@
  * [PHP中的foreach谜题及其他](php_foreach.md)
 * [Nginx技术]
  * [Nginx中的location匹配顺序](nginx_location.md)
+* [其他]
+ * [利用Influxdb+Grafana搭建自己的业务监控系统](monitor.md)
