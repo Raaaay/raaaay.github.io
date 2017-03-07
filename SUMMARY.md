@@ -13,3 +13,4 @@
  * [Nginx中的location匹配顺序](nginx_location.md)
 * [其他]
  * [利用Influxdb+Grafana搭建自己的业务监控系统](monitor.md)
+ * [高可用系统的演化实践](sso.md)
