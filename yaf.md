@@ -39,7 +39,7 @@ yaf.environ=product
   - models  
   - plugins
 ```
-3. 要实现hello world，只需要几行代码即可。
+3. 要实现简单的hello world，只需要几行代码即可。
 ```php
 # index.php
 define("APPLICATION_PATH",  dirname(__FILE__));
@@ -61,3 +61,21 @@ class IndexController extends Yaf_Controller_Abstract {
   }
 }
 ```
+4. 配置conf/application.ini配置文件。在运行时，会自动选择与yaf.environ名称相同的配置节点。可以在线上线下设置不同的yaf.environ实现线上线下差异化配置。
+```ini
+[common]
+application.directory=yaf-test
+[product:common]
+# product节点配置继承common
+```
+5. 配置自己的web server。此处给出nginx的配置示例。
+```nginx
+location / {
+  root yaf-test;
+  rewrite ^(.*)$ /index.php break;
+  fastcgi_pass 127.0.0.1:9000;
+  fastcgi_param SCRIPT_FILENAME yaf-test/index.php;
+  include fastcgi_params;
+}
+```
+配置完成后，启动nginx，即可在浏览器中看到效果。
