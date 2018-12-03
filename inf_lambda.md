@@ -1,4 +1,5 @@
 原文链接：[大数据系统的Lambda架构](https://zhuanlan.zhihu.com/p/20510974)
+
 Nathan Marz的大作_Big Data: Principles and best practices of scalable real-time data systems_介绍了Labmda Architecture的概念，用于在大数据架构中，如何让real-time与batch job更好地结合起来，以达成对大数据的实时处理。
 
 ### 传统系统的问题
