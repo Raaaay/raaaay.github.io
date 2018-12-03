@@ -8,7 +8,7 @@ Nathan Marz的大作_Big Data: Principles and best practices of scalable real-ti
 
 解决的办法是在Web服务器与数据库之间增加一个异步处理的队列。如下图所示：
 
-![img](https://pic3.zhimg.com/80/304eeaf999918c1fd08d9a3b869184a6_hd.png)
+![img](resources/lambda_1.png)
 
 当Web Server收到页面请求时，会将消息添加到队列中。在DB端，创建一个Worker定期从队列中取出消息进行处理，例如每次读取100条消息。这相当于在两者之间建立了一个缓冲。
 
@@ -56,7 +56,7 @@ Query = function(all data)
 
 Lambda架构的主要思想就是将大数据系统构建为多个层次，如下图所示：
 
-![img](https://pic1.zhimg.com/80/7c41d5f9f76376ecc1faff48f0a259fc_hd.png)
+![img](resources/lambda_2.png)
 
 理想状态下，任何数据访问都可以从表达式Query = function(all data)开始，但是，若数据达到相当大的一个级别（例如PB），且还需要支持实时查询时，就需要耗费非常庞大的资源。
 
@@ -133,6 +133,6 @@ query = function(batch view . realtime view)
 
 整个Lambda架构如下图所示：
 
-![img](https://pic4.zhimg.com/80/3f93b809110b83a8f034d83daefe8a2f_hd.png)
+![img](resources/lambda_3.png)
 
 基于Lambda架构，一旦数据通过batch layer进入到serving layer，在realtime view中的相应结果就不再需要了。
