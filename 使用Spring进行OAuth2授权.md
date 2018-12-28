@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-###授权服务器配置
+### 授权服务器配置
 
 授权服务器可以通过@EnableAuthorizationServer注解来开启，配置类需要继承_AuthorizationServerConfigurerAdapter_类，并按需求进行配置。下面的例子展示了一个简单的授权服务器，其配置的意思是为client这个客户端（密钥为clientpassword）分配read和write的权限，授权方式是password。关于其他的授权方式，可以查看OAuth2文档。生成的token的有效期是1小时，token保存在内存中（也可以通过JDBC方式保存在数据库中）。
 
@@ -143,5 +143,5 @@ public class ProductResource {
 
 1. 启动Springboot，访问链接http://localhost:8080/products
 2. 由于未经过授权，会跳转到http://localhost:8080/login
-3. 输入用户名密码（admin/admin）后，跳转回 http://localhost:8080/products，并打印出结果。
+3. 输入用户名密码（admin/admin）后，跳转回 http://localhost:8080/products ，并打印出结果。
 
